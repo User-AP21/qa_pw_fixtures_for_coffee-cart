@@ -1,8 +1,9 @@
 import { test } from '../fixtures/fixtures';
+import { COFFEE_PRICES } from '../../src/ui/constants/coffeePricesConstants';
 import {
-  CAPPUCCINO_PRICE,
-} from '../../src/ui/constants/coffeePricesConstants';
-import { unitPriceFormatStr, priceFormatStr, } from '../../src/common/helpers/getPriceForQuantity';
+  unitPriceFormatStr,
+  priceFormatStr,
+} from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Cappuccino correctly added to the Cart', async ({
   menuPage,
@@ -16,9 +17,9 @@ test('Check Cappuccino correctly added to the Cart', async ({
 
   await cartPage.assertCappuccinoNameIsContainsCorrectText();
   await cartPage.assertCappuccinoUnitContainsCorrectText(
-    unitPriceFormatStr(CAPPUCCINO_PRICE, 1)
+    unitPriceFormatStr(COFFEE_PRICES.cappuccino, 1),
   );
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    priceFormatStr(CAPPUCCINO_PRICE)
+    priceFormatStr(COFFEE_PRICES.cappuccino),
   );
 });
