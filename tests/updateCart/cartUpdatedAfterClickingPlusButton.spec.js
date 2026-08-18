@@ -1,13 +1,14 @@
-import { test } from '@playwright/test';
-import { MenuPage } from '../../src/pages/MenuPage';
-import { CartPage } from '../../src/pages/CartPage';
+import { test } from '../fixtures/fixtures';
+import {
+  ESPRESSO_PRICE,
+  CAPPUCCINO_PRICE
+} from '../../src/ui/constants/coffeePricesConstants';
+import { totalPriceFormatStr, priceFormatStr } from '../../src/common/helper/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
-  page,
+  menuPage,
+  cartPage,
 }) => {
-  const menuPage = new MenuPage(page);
-  const cartPage = new CartPage(page);
-
   await menuPage.open();
   await menuPage.clickCappucinoCup();
   await menuPage.clickEspressoCup();
@@ -15,17 +16,25 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await menuPage.clickCartLink();
   await cartPage.waitForLoading();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$10.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(ESPRESSO_PRICE));
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText('$20.00');
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$19.00');
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(ESPRESSO_PRICE * 2)
+  );
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(priceFormatStr(CAPPUCCINO_PRICE));
 
   await cartPage.clickAddOneCappuccinoButton();
 
-  await cartPage.assertCappuccinoTotalCostContainsCorrectText('$38.00');
-  await cartPage.assertEspressoTotalCostContainsCorrectText('20.00');
+  await cartPage.assertCappuccinoTotalCostContainsCorrectText(
+    priceFormatStr(CAPPUCCINO_PRICE * 2)
+  );
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(ESPRESSO_PRICE * 2)
+  );
 
-  await cartPage.assertTotalCheckoutContainsValue('$58.00');
+  await cartPage.assertTotalCheckoutContainsValue(
+  totalPriceFormatStr(CAPPUCCINO_PRICE * 2 + ESPRESSO_PRICE * 2,1)
+);
 });
