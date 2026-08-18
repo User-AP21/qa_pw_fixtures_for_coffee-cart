@@ -2,7 +2,7 @@ import { test } from '../fixtures/fixtures';
 import {
   ESPRESSO_PRICE,
 } from '../../src/ui/constants/coffeePricesConstants';
-import { unitPriceFormatStr, priceFormatStr } from '../../src/common/helper/getPriceForQuantity';
+import { unitPriceFormatStr, priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Check Espresso correctly added to the Cart', async ({
   menuPage,

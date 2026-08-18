@@ -3,7 +3,7 @@ import {
   ESPRESSO_PRICE,
   CAPPUCCINO_PRICE
 } from '../../src/ui/constants/coffeePricesConstants';
-import { totalPriceFormatStr, priceFormatStr } from '../../src/common/helper/getPriceForQuantity';
+import { totalPriceFormatStr, priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert cart updated correctly after clicking plus for drinks', async ({
   menuPage,

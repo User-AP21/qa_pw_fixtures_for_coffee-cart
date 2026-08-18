@@ -5,7 +5,7 @@ import {
   CAPPUCCINO_PRICE,
   AMERICANO_PRICE,
 } from '../../src/ui/constants/coffeePricesConstants';
-import { priceFormatStr } from '../../src/common/helper/getPriceForQuantity';
+import { priceFormatStr } from '../../src/common/helpers/getPriceForQuantity';
 
 test('Assert discounted Mocha added to the Cart after promo accepting', async ({
   menuPage,
